@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysis Results — AI vs Human Text Detector</title>
+  <meta name="description" content="View your text analysis results — prediction, confidence score, and final decision." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- kept in DOM, hidden via CSS -->
+  <div class="bg-blobs">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="blob b4"></div>
+  </div>
+  <div class="grid-lines"></div>
+
+  <div class="wrapper">
+
+    <!-- ── NAV ── -->
+    <nav class="navbar">
+      <div class="brand">
+        <div class="brand-icon">🧠</div>
+        <span class="brand-name">TextSense <em>AI</em></span>
+      </div>
+      <a href="index.html" class="nav-back-btn">
+        ← Back
+      </a>
+    </nav>
+
+    <!-- ── RESULT HERO ── -->
+    <header class="result-hero fade-in">
+      <div class="hero-chip">Analysis Complete</div>
+      <h1 class="hero-title">
+        Detection <span class="grad-text">Results</span>
+      </h1>
+      <p class="hero-sub">
+        Logistic Regression · Live ML Prediction
+      </p>
+    </header>
+
+    <!-- ── 3 RESULT CARDS ── -->
+    <section class="results-section">
+
+      <!-- CARD 1: PREDICTION -->
+      <div class="res-card card-human fade-in" style="animation-delay:.05s">
+        <div class="card-top-line card-top-green" id="pred-top-line"></div>
+
+        <div class="res-card-header">
+          <div class="res-icon-box icon-green" id="pred-icon">🧑</div>
+          <div>
+            <div class="res-eyebrow">Prediction</div>
+            <div class="res-heading c-green" id="pred-heading">Human-Written</div>
+          </div>
+        </div>
+
+        <p class="res-desc" id="pred-desc">
+          This text exhibits strong indicators of natural human authorship — varied sentence
+          rhythm, personal voice, organic lexical diversity, and minimal formal buzzwords.
+        </p>
+
+        <div class="res-tag tag-green" id="pred-tag">✅ &nbsp;Human Detected</div>
+
+        <div class="mini-signals">
+          <div class="msig">
+            <span class="msig-name">Lexical Diversity</span>
+            <span class="msig-bar-track"><span class="msig-bar" id="bar-lex" style="--w:78%;--c:#059669;"></span></span>
+            <span class="msig-val c-green" id="val-lex">High</span>
+          </div>
+          <div class="msig">
+            <span class="msig-name">Personal Voice</span>
+            <span class="msig-bar-track"><span class="msig-bar" id="bar-voice" style="--w:82%;--c:#059669;"></span></span>
+            <span class="msig-val c-green" id="val-voice">High</span>
+          </div>
+          <div class="msig">
+            <span class="msig-name">AI Buzzwords</span>
+            <span class="msig-bar-track"><span class="msig-bar" id="bar-buzz" style="--w:12%;--c:#dc2626;"></span></span>
+            <span class="msig-val c-red" id="val-buzz">Low</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: CONFIDENCE SCORE -->
+      <div class="res-card card-conf fade-in" style="animation-delay:.15s">
+        <div class="card-top-line card-top-violet"></div>
+
+        <div class="res-card-header">
+          <div class="res-icon-box icon-violet">📊</div>
+          <div>
+            <div class="res-eyebrow">Confidence Score</div>
+            <div class="res-heading c-violet conf-num" id="conf-num">—</div>
+          </div>
+        </div>
+
+        <p class="res-desc" id="conf-desc">
+          Analyzing confidence score...
+        </p>
+
+        <div class="prog-wrap">
+          <div class="prog-track">
+            <div class="prog-fill" id="prog-fill" style="--prog:0%; --fill: linear-gradient(90deg,#059669,#2563eb);"></div>
+            <span class="prog-marker" style="left:60%">60%</span>
+            <span class="prog-marker" style="left:80%">80%</span>
+          </div>
+          <div class="prog-scale">
+            <span>0%</span>
+            <span>50%</span>
+            <span>100%</span>
+          </div>
+        </div>
+
+        <div class="threshold-legend">
+          <span class="tleg tleg-warn">⚠ &lt;60% Uncertain</span>
+          <span class="tleg tleg-review">❓ 60–80% Review</span>
+          <span class="tleg tleg-ok">✅ &gt;80% Acceptable</span>
+        </div>
+
+        <div class="model-scores">
+          <div class="mscore">
+            <span class="mscore-name">📈 Logistic Regression</span>
+            <span class="mscore-val" id="lr-score">—</span>
+          </div>
+          <div class="mscore">
+            <span class="mscore-name">🎯 Naive Bayes</span>
+            <span class="mscore-val">—</span>
+          </div>
+          <div class="mscore">
+            <span class="mscore-name">⚡ Ensemble</span>
+            <span class="mscore-val">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: FINAL DECISION -->
+      <div class="res-card card-decision fade-in" style="animation-delay:.25s">
+        <div class="card-top-line card-top-green" id="dec-top-line"></div>
+
+        <div class="res-card-header">
+          <div class="res-icon-box icon-green" id="dec-icon">✅</div>
+          <div>
+            <div class="res-eyebrow">Final Decision</div>
+            <div class="res-heading c-green" id="dec-heading">Acceptable</div>
+          </div>
+        </div>
+
+        <p class="res-desc" id="dec-desc">
+          Loading decision...
+        </p>
+
+        <div class="decision-states">
+
+          <div class="dstate dstate-green" id="dstate-acceptable">
+            <div class="dstate-icon">✅</div>
+            <div class="dstate-info">
+              <div class="dstate-name">Acceptable</div>
+              <div class="dstate-rule">Confidence ≥ 80%</div>
+            </div>
+          </div>
+
+          <div class="dstate dstate-review" id="dstate-review">
+            <div class="dstate-icon">❓</div>
+            <div class="dstate-info">
+              <div class="dstate-name">Needs Review</div>
+              <div class="dstate-rule">60% ≤ Confidence &lt; 80%</div>
+            </div>
+          </div>
+
+          <div class="dstate dstate-ai" id="dstate-uncertain">
+            <div class="dstate-icon">⚠️</div>
+            <div class="dstate-info">
+              <div class="dstate-name">Likely AI-Generated</div>
+              <div class="dstate-rule">Confidence &lt; 60%</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── SUMMARY STRIP ── -->
+    <div class="summary-strip fade-in" style="animation-delay:.35s">
+      <div class="card-top-line"></div>
+      <div class="sstrip-inner">
+        <div class="sstrip-item">
+          <span class="sstrip-ico">🤖</span>
+          <div><div class="sstrip-lbl">Model Used</div><div class="sstrip-val">Logistic Regression</div></div>
+        </div>
+        
+        <div class="sstrip-sep"></div>
+        <div class="sstrip-item">
+          <span class="sstrip-ico">⏱</span>
+          <div><div class="sstrip-lbl">Processing Time</div><div class="sstrip-val" id="proc-time">—</div></div>
+        </div>
+        <div class="sstrip-sep"></div>
+        <div class="sstrip-item">
+          <span class="sstrip-ico">📝</span>
+          <div><div class="sstrip-lbl">Words Analyzed</div><div class="sstrip-val" id="word-count">—</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BACK BUTTON ── -->
+    <div class="back-row fade-in" style="animation-delay:.40s">
+      <a href="index.html" class="btn-back">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+        </svg>
+        Analyze Another Text
+      </a>
+    </div>
+
+    <footer class="site-footer">
+      AI vs Human Text Detection System &mdash; ML Project Demo
+    </footer>
+
+  </div>
+
+  <!-- ── JAVASCRIPT (unchanged) ── -->
+  <script>
+    const raw = localStorage.getItem('analysisResult');
+
+    if (!raw) {
+      window.location.href = 'index.html';
+    } else {
+      const r = JSON.parse(raw);
+      const isHuman = r.prediction === 'Human-written';
+      const conf = r.confidence;
+
+      // ── CARD 1: Prediction ──
+      const predHeading = document.getElementById('pred-heading');
+      const predIcon    = document.getElementById('pred-icon');
+      const predTag     = document.getElementById('pred-tag');
+      const predDesc    = document.getElementById('pred-desc');
+      const predTopLine = document.getElementById('pred-top-line');
+      const predCard    = document.querySelector('.card-human');
+
+      if (isHuman) {
+        predHeading.textContent = 'Human-Written';
+        predHeading.className   = 'res-heading c-green';
+        predIcon.textContent    = '🧑';
+        predIcon.className      = 'res-icon-box icon-green';
+        predTag.textContent     = '✅  Human Detected';
+        predTag.className       = 'res-tag tag-green';
+        predDesc.textContent    = 'This text shows strong indicators of natural human authorship — varied sentence rhythm, personal voice, and organic lexical diversity.';
+        document.getElementById('bar-lex').style.cssText   = '--w:78%; --c:#059669;';
+        document.getElementById('bar-voice').style.cssText = '--w:82%; --c:#059669;';
+        document.getElementById('bar-buzz').style.cssText  = '--w:12%; --c:#dc2626;';
+        document.getElementById('val-lex').textContent     = 'High';
+        document.getElementById('val-lex').className       = 'msig-val c-green';
+        document.getElementById('val-voice').textContent   = 'High';
+        document.getElementById('val-voice').className     = 'msig-val c-green';
+        document.getElementById('val-buzz').textContent    = 'Low';
+        document.getElementById('val-buzz').className      = 'msig-val c-red';
+      } else {
+        predHeading.textContent = 'AI-Generated';
+        predHeading.className   = 'res-heading c-red';
+        predIcon.textContent    = '🤖';
+        predIcon.className      = 'res-icon-box icon-red';
+        predTag.textContent     = '⚠  AI Detected';
+        predTag.className       = 'res-tag tag-red';
+        predDesc.textContent    = 'This text exhibits patterns commonly associated with AI-generated content — formal structure, repetitive phrasing, and lack of personal voice.';
+        predCard.style.background    = '#fff';
+        predCard.style.borderColor   = 'rgba(220,38,38,0.2)';
+        predCard.style.borderTop     = '2px solid #dc2626';
+        predTopLine.style.background = 'none';
+        document.getElementById('bar-lex').style.cssText   = '--w:28%; --c:#dc2626;';
+        document.getElementById('bar-voice').style.cssText = '--w:18%; --c:#dc2626;';
+        document.getElementById('bar-buzz').style.cssText  = '--w:88%; --c:#059669;';
+        document.getElementById('val-lex').textContent     = 'Low';
+        document.getElementById('val-lex').className       = 'msig-val c-red';
+        document.getElementById('val-voice').textContent   = 'Low';
+        document.getElementById('val-voice').className     = 'msig-val c-red';
+        document.getElementById('val-buzz').textContent    = 'High';
+        document.getElementById('val-buzz').className      = 'msig-val c-green';
+      }
+
+      // ── CARD 2: Confidence ──
+      document.getElementById('conf-num').textContent = conf + '%';
+      document.getElementById('prog-fill').style.cssText =
+        `--prog:${conf}%; --fill: linear-gradient(90deg,#059669,#2563eb);`;
+      document.getElementById('conf-desc').innerHTML =
+        `The model assigned a confidence of <strong>${conf}%</strong> to this prediction.
+         Scores above 80% are considered high-certainty results.`;
+      document.getElementById('lr-score').textContent = conf + '%';
+
+      // ── CARD 3: Decision ──
+      const decHeading = document.getElementById('dec-heading');
+      const decDesc    = document.getElementById('dec-desc');
+      const decIcon    = document.getElementById('dec-icon');
+      const decTopLine = document.getElementById('dec-top-line');
+      const decCard    = document.querySelector('.card-decision');
+
+      ['dstate-acceptable','dstate-review','dstate-uncertain'].forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('dstate-active');
+        const badge = el.querySelector('.dstate-badge');
+        if (badge) badge.remove();
+      });
+
+      if (r.decision === 'Acceptable') {
+        decHeading.textContent   = 'Acceptable';
+        decHeading.className     = 'res-heading c-green';
+        decIcon.textContent      = '✅';
+        decIcon.className        = 'res-icon-box icon-green';
+        decDesc.textContent      = 'Confidence ≥ 80% — the model is highly certain. This result is reliable and can be acted upon with strong confidence.';
+        decCard.style.borderTop  = '2px solid #059669';
+        decTopLine.style.background = 'linear-gradient(90deg, #059669, #34d399)';
+        const s = document.getElementById('dstate-acceptable');
+        s.classList.add('dstate-active');
+        s.innerHTML += '<div class="dstate-badge green-badge">Active</div>';
+
+      } else if (r.decision === 'Needs Review') {
+        decHeading.textContent   = 'Needs Review';
+        decHeading.className     = 'res-heading c-amber';
+        decIcon.textContent      = '❓';
+        decIcon.className        = 'res-icon-box icon-amber';
+        decDesc.textContent      = 'Confidence between 60–80% — moderate certainty. Manual review is recommended before acting on this result.';
+        decCard.style.borderTop  = '2px solid #d97706';
+        decTopLine.style.background = 'linear-gradient(90deg, #d97706, #fbbf24)';
+        const s = document.getElementById('dstate-review');
+        s.classList.add('dstate-active');
+        s.innerHTML += '<div class="dstate-badge amber-badge">Active</div>';
+
+      } else {
+        decHeading.textContent   = 'Uncertain';
+        decHeading.className     = 'res-heading c-red';
+        decIcon.textContent      = '⚠️';
+        decIcon.className        = 'res-icon-box icon-red';
+        decDesc.textContent      = 'Confidence < 60% — the model is not certain. This result should be treated with caution.';
+        decCard.style.borderTop  = '2px solid #dc2626';
+        decTopLine.style.background = 'linear-gradient(90deg, #dc2626, #f87171)';
+        const s = document.getElementById('dstate-uncertain');
+        s.classList.add('dstate-active');
+        s.innerHTML += '<div class="dstate-badge red-badge">Active</div>';
+      }
+
+      // ── SUMMARY STRIP ──
+      document.getElementById('word-count').textContent = r.word_count + ' words';
+      document.getElementById('proc-time').textContent  = '< 1s';
+    }
+  </script>
+
+</body>
+</html>
