@@ -53,7 +53,7 @@ X_test_vec = vectorizer.transform(X_test)
 print("⏳ Training Model... Please wait.")
 model = LogisticRegression(max_iter=500)
 model.fit(X_train_vec, y_train)
-print("✅ Training Completed!")
+print("Training Completed!")
 
 
 def predict_text(text):
